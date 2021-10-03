@@ -1,19 +1,34 @@
  # Main Function
-def TicTacToe():
-    board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+class TicTacToe():
+    def __init__(self):
+        self.board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    def play(self):
+        self.board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        # Main game loop
+        while True:
+            self.PrintBoard()
+            self.Turn("X")
+            if self.isWinning("X"):
+                print("X wins!")
+                break
 
+            self.PrintBoard()
+            self.Turn("O")
+            if self.isWinning("O"):
+                print("O wins!")
+                break
     # Helper function to print the board
-    def PrintBoard():
+    def PrintBoard(self):
         print()
-        print('', board[0], "|", board[1], "|", board[2])
+        print('', self.board[0], "|", self.board[1], "|", self.board[2])
         print("---|---|---")
-        print('', board[3], "|", board[4], "|", board[5])
+        print('', self.board[3], "|", self.board[4], "|", self.board[5])
         print("---|---|---")
-        print('', board[6], "|", board[7], "|", board[8])
+        print('', self.board[6], "|", self.board[7], "|", self.board[8])
         print()
 
     # Get the number of the move
-    def GetMove():
+    def GetMove(self):
         while True:
             num = input()
             try:
@@ -26,42 +41,29 @@ def TicTacToe():
                 print("Please enter a valid number.\n")
 
     # Check if a player is winning
-    def isWinning(player):
+    def isWinning(self, player):
         MagicSquare = [4, 9, 2, 3, 5, 7, 8, 1, 6]
         for x in range(9):
             for y in range(9):
                 for z in range(9):
                     if x != y and y != z and z != x:
-                        if board[x] == player and board[y] == player and board[z] == player:
+                        if self.board[x] == player and self.board[y] == player and self.board[z] == player:
                             if MagicSquare[x] + MagicSquare[y] + MagicSquare[z] == 15:
                                 return True
 
-        if board.count("X") + board.count("O") == 9:
+        if self.board.count("X") + self.board.count("O") == 9:
             print("The game has ended in a tie.")
             return True
 
     # Performs a player turn and checks if a space is preoccupied
-    def Turn(player):
+    def Turn(self, player):
         print("Choose a box player", player)
-        index = GetMove() - 1
-        if board[index] == "X" or board[index] == "O":
+        index = self.GetMove() - 1
+        if self.board[index] == "X" or self.board[index] == "O":
             print("Box already occupied. Try another one\n")
-            Turn(player)
+            self.Turn(player)
         else:
-            board[index] = player
-    
-    # Main game loop
-    while True:
-        PrintBoard()
-        Turn("X")
-        if isWinning("X"):
-            print("X wins!")
-            break
+            self.board[index] = player
 
-        PrintBoard()
-        Turn("O")
-        if isWinning("O"):
-            print("O wins!")
-            break
-
-TicTacToe()
+tictactoe = TicTacToe()
+tictactoe.play()
