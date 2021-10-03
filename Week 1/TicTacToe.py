@@ -3,7 +3,6 @@ class TicTacToe():
     def __init__(self):
         self.board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     def play(self):
-        self.board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         # Main game loop
         while True:
             self.PrintBoard()
